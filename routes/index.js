@@ -1,12 +1,11 @@
-const routerComments=require('./routesComments');
-const routerMovies=require('./routesMovies');
-const routerTheaters=require('./routesTheaters');
-const routerUsers=require('./routesUsers');
+const routerCitas=require('./routesCitas');
+const routerServicios=require('./routesServicios');
+const routerEstilistas=require('./routesEstilistas');
 
 function routerApi(app){
-    app.use('/movies', routerMovies);
-    app.use('/Theaters',routerTheaters);
-    app.use('/users',routerUsers);
+    app.use('/citasJhon', routerCitas),
+    app.use('/serviciosJhon',routerServicios);
+    app.use('/estilistaJhon',routerEstilistas);
        
 }
 
