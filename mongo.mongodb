@@ -1,3 +1,15 @@
-use('beautysoft');
+use('Beautysoft');
 
-db.citas.find({})
+db.citasJhon.aggregate([
+    {
+                $lookup: {
+                  from: "servicios", //es desde donde me traigo la informacion
+                  localField: "Id_servicio", //como se llama el id "donde me paro"
+                  foreignField: "Id_servicio",
+                  as: "servicios",
+                },
+              },
+              {
+                $unwind:'$servicios'
+              }
+])

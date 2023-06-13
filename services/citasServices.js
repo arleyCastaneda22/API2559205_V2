@@ -54,6 +54,21 @@ async insertOne(body){
     }
 }
 
+//InsertMany
+
+async insertMany(body){
+  const cliente =new MongoClient(uri);
+  try {
+      await cliente.connect()
+      const resultado= await cliente.db('Beautysoft').collection('citasJhon').insertMany(body);
+      return resultado;
+  } catch (error) {
+      console.log(error);
+  }finally{
+      await cliente.close()
+  }
+}
+
 //DeletOne
 async deleteOne(id){
   const client = new MongoClient(uri);
@@ -107,6 +122,37 @@ async actualizarMuchos(estado){
      await cliente.close()
    }
  }
+ //lookups
+
+ async pipeline(servicios, Id_servicio, Id_servicio1, alias) {
+  const cliente = new MongoClient(uri);
+   try {
+    await cliente.connect();
+     const  pipeline1 = [
+       {
+         $lookup: {
+           from: servicios, //es desde donde me traigo la informacion
+           localField: Id_servicio, //como se llama el id "donde me paro"
+           foreignField: Id_servicio1,
+           as: alias,
+         },
+       },
+      
+     ]
+ 
+     const collection = cliente.db("Beautysoft").collection("citasJhon");
+     const resultado = await collection.aggregate(pipeline1).toArray();
+     return resultado;
+   } catch (error) {
+     console.error("Error al ejecutar el pipeline", error);
+   } finally {
+     await cliente.close();
+   }
+ }
+
 }
+
+
+
 
 module.exports=citasServices;

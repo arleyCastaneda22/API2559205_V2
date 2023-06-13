@@ -47,6 +47,22 @@ router.post('/', async (req, res)=>{
             res.status(404).send("No se creó la cita");
         }
 })
+
+router.post('/', async (req, res)=>{
+    const body = req.body;
+        const resultado = await services.insertMany([body]);
+        if(resultado){
+            res.status(201).json({
+                message: 'Se creo las  citas',
+                resultado
+            });
+        }else{
+            res.status(404).send("No se creó la cita");
+        }
+})
+
+
+
 //DELETE
 router.delete('/:id', async (req, res)=>{
     const id = req.params.id;
@@ -88,6 +104,20 @@ router.patch('/',async (req, res)=>{
         });
     }else{
         res.status(404).send("No se actualizaron las citas");
+    }
+}
+)
+//LOOKUPS
+router.get('/:servicios/:Id_servicio/:Id_servicio1/:alias',async (req, res)=>{
+    const servicios=req.params.servicios;
+    const Id_servicios=req.params.Id_servicio;
+    const Id_servicio1=req.params.Id_servicio1;
+    const alias = req.params.alias;
+    const resultado = await services.pipeline(servicios, Id_servicios, Id_servicio1, alias);
+    if(resultado){
+        res.status(201).send(resultado);
+    }else{
+        res.status(404).send("No se pudo hacer lookups");
     }
 }
 )
