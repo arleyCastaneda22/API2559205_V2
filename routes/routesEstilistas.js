@@ -47,6 +47,19 @@ router.post('/', async (req, res)=>{
             res.status(404).send("No se creó el estilista");
         }
 })
+
+router.post('/', async (req, res)=>{
+    const body = req.body;
+        const resultado = await services.insertMany(body);
+        if(resultado){
+            res.status(201).json({
+                message: 'Se creo los estilista',
+                resultado
+            });
+        }else{
+            res.status(404).send("No se creó el estilista");
+        }
+})
 //DELETE
 router.delete('/:id', async (req, res)=>{
     const id = req.params.id;

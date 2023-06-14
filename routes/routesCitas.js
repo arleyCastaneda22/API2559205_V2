@@ -52,10 +52,7 @@ router.post('/', async (req, res)=>{
     const body = req.body;
         const resultado = await services.insertMany([body]);
         if(resultado){
-            res.status(201).json({
-                message: 'Se creo las  citas',
-                resultado
-            });
+            res.status(201).send('Se insertaron varios documentos');
         }else{
             res.status(404).send("No se creó la cita");
         }

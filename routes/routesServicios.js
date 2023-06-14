@@ -30,7 +30,7 @@ router.get('/:id', async (req, res)=>{
         if(resultado){
             res.status(200).send(resultado);
         }else{
-            res.status(404).send("No se encontro la información");
+            res.status(404).send("No se encontró la información");
         }
 })
 
@@ -38,6 +38,19 @@ router.get('/:id', async (req, res)=>{
 router.post('/', async (req, res)=>{
     const body = req.body;
         const resultado = await services.insertOne(body);
+        if(resultado){
+            res.status(201).json({
+                message: 'Se creó el servicio',
+                resultado
+            });
+        }else{
+            res.status(404).send("No se creó el servicio");
+        }
+})
+
+router.post('/', async (req, res)=>{
+    const body = req.body;
+        const resultado = await services.insertMany(body);
         if(resultado){
             res.status(201).json({
                 message: 'Se creó el servicio',

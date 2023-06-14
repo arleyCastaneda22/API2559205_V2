@@ -52,6 +52,20 @@ async insertOne(body){
         await cliente.close()
     }
 }
+//InserMany
+async insertMany(body){
+  const cliente =new MongoClient(uri);
+  try {
+      await cliente.connect()
+      const resultado= await cliente.db('Beautysoft').collection('citasJhon').insertMany(body);
+      return resultado;
+  } catch (error) {
+      console.log(error);
+  }finally{
+      await cliente.close()
+  }
+
+}
 
 //DeletOne
 async deleteOne(id){
