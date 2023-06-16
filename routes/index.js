@@ -1,11 +1,16 @@
+const express = require('express');
+
 const routerCitas=require('./routesCitas');
 const routerServicios=require('./routesServicios');
 const routerEstilistas=require('./routesEstilistas');
 
 function routerApi(app){
-    app.use('/citasJhon', routerCitas),
-    app.use('/serviciosJhon',routerServicios);
-    app.use('/estilistaJhon',routerEstilistas);
+    const router=express.Router();
+    
+    app.use('/beautysoft/v1', router);
+    router.use('/citasJhon', routerCitas),
+    router.use('/serviciosJhon',routerServicios);
+    router.use('/estilistaJhon',routerEstilistas);
        
 }
 

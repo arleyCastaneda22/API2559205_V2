@@ -3,24 +3,30 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { MongoClient, ObjectId } = require('mongodb');
 const citasServices = require('../services/citasServices');
+const async = require('hbs/lib/async');
 
 
 const services =new citasServices();
-
 
 const uri = process.env.URI;
 
 const router = express.Router();
 
 
-router.get('/', async (req,res)=>{
-    const resultado = await services.find();
 
-    if(resultado.length>0){
-        res.status(200).send(resultado);
-    }else{
-        res.status(404).send('No encontró infromación');
-    }
+
+// router.get('/', async (req, res)=>{
+    
+//     const resultado =await services.find();
+//     if(resultado){
+//         res.status(200).send(resultado);
+//     }else{
+//         res.status(404).send("No se encontro la informacion");
+//     }
+// })
+
+router.get('/', async(req,res)=>{
+    res.render('../views/index.hbs')
 })
 
 
@@ -91,7 +97,7 @@ router.patch('/:id', async (req, res)=>{
 })
 
 //updateMany
-router.patch('/',async (req, res)=>{
+router.put('/',async (req, res)=>{
     const estado=req.body.estado;
     const resultado = await services.actualizarMuchos(estado);
     if(resultado){

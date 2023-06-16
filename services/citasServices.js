@@ -11,19 +11,19 @@ const router = express.Router();
 class citasServices{
     constructor(){}
 //------------------find------//
-async find(){
+
+async find(limit, offset){
   const cliente = new MongoClient(uri);
-  try {
-    await cliente.connect();
-    const resultado = await cliente.db('Beautysoft').collection('citasJhon').find({}).limit(10).toArray();
-    return resultado;
-    
-  } catch (error) {
-    console.log(error);
+  try{
+      await cliente.connect();
+      const resultado = await cliente.db("Beautysoft").collection("citasJhon").find({}).skip(Number(offset)).limit(Number(limit)).toArray();
+      return resultado;
+  }catch(e){
+      console.log(e);
   }finally{
-    await cliente.close()
+      await cliente.close();
   }
-}
+}    
 
 
 //2. findOne()
@@ -108,7 +108,7 @@ async actualizarMuchos(estado){
    const cliente = new MongoClient(uri);
    try {
      await cliente.connect();
-     const resultado = await cliente.db('Beautysoft').collection('citasJhon').updateMany({},
+     const resultado = await cliente.db('Beautysoft').collection('citasJhon').updateMany({Id_cita:{$in:[1,2,3]}},
       {
         $set:{estado:estado}
       })

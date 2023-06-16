@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { MongoClient, ObjectId } = require('mongodb');
 const estilistaServices = require('../services/estilistaServices');
-
+const hbs=require('hbs');
 
 const services =new estilistaServices();
 
@@ -13,13 +13,14 @@ const uri = process.env.URI;
 const router = express.Router();
 
 
-router.get('/', async (req,res)=>{
-    const resultado = await services.find();
 
-    if(resultado.length>0){
-        res.status(200).send(resultado);
+router.get('/', async (req, res)=>{
+    const { limit, offset } = req.query;
+    const resultado =await services.find(limit, offset);
+    if(resultado){
+        res.status(200).render('../views/bienvenid.hbs',{title:resultado});
     }else{
-        res.status(404).send('No encontró infromación');
+        res.status(404).send("No se encontro la informacion");
     }
 })
 

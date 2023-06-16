@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+
+<body>
+<section class="card">
+  <div class="card_perfil">
+    <div class="card__nombre">
+      <img
+        src="https://i0.wp.com/highlysensitiverefuge.com/wp-content/uploads/2019/12/highly-sensitive-person-signs.jpeg?resize=1150%2C702&ssl=1"
+        alt=""
+      />
+      {{#each title}}
+      <h1>{{nombre}}</h1>
+      {{/each}}
+      <span>Estilista</span>
+    </div>
+    <hr />
+    <div class="card__datos">
+          {{#each title}}
+        <p>Correo:{{email}} </p>
+      {{/each}}
+      {{#each title}}
+        <p>Estado: {{estado}}</p>
+        {{/each}}
+    </div>
+    <hr />
+    <div class="boton">
+      <a href="#" class="enlace">Editar</a>
+    </div>
+  </div>
+</body>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.card{
+    display: flex;
+    width: 82%;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+   
+}
+
+.card_perfil{
+    width: 280px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(211, 211, 211, 1);
+    box-shadow: 2px 2px 5px rgb(109, 109, 109);
+    border: solid  rgba(249, 175, 26, 0) ;
+}
+    
+
+.card_perfil:hover{
+    border: solid  rgb(249, 173, 26, 1) ;
+}
+
+.card_perfil:hover img{
+    transform: rotate(0);
+}
+.card__nombre{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.card__datos{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+.boton{
+   text-align: center;
+   margin-top: 13px;
+}
+
+.enlace{
+    text-decoration: none;
+    background-color: rgb(249, 173, 26, 1);
+    color: white;
+    padding: 8px 20px;
+}
+
+img{
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px rgb(216, 216, 216);
+    transform: rotate(-30deg)
+}
+hr{
+    width: 100%;
+    height: rgb(223, 221, 221);
+}
+
+
+</style>
+</html>

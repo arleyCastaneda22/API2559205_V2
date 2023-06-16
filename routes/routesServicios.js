@@ -13,13 +13,13 @@ const uri = process.env.URI;
 const router = express.Router();
 
 
-router.get('/', async (req,res)=>{
-    const resultado = await services.find();
-
-    if(resultado.length>0){
+router.get('/', async (req, res)=>{
+    const { limit, offset } = req.query;
+    const resultado =await services.find(limit, offset);
+    if(resultado){
         res.status(200).send(resultado);
     }else{
-        res.status(404).send('No encontró información');
+        res.status(404).send("No se encontro la informacion");
     }
 })
 

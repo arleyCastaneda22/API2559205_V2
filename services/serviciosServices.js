@@ -10,19 +10,18 @@ const router = express.Router();
 class serviciosServices{
     constructor(){}
 //------------------find------//
-async find(){
+async find(limit, offset){
   const cliente = new MongoClient(uri);
-  try {
-    await cliente.connect();
-    const resultado = await cliente.db('Beautysoft').collection('serviciosJhon').find({}).limit(10).toArray();
-    return resultado;
-    
-  } catch (error) {
-    console.log(error);
+  try{
+      await cliente.connect();
+      const resultado = await cliente.db("Beautysoft").collection("serviciosJhon").find({}).skip(Number(offset)).limit(Number(limit)).toArray();
+      return resultado;
+  }catch(e){
+      console.log(e);
   }finally{
-    await cliente.close()
+      await cliente.close();
   }
-}
+}   
 
 
 //2. findOne()
