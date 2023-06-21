@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { MongoClient, ObjectId } = require('mongodb');
 const estilistaServices = require('../services/estilistaServices');
+
 const hbs=require('hbs');
 
 const services =new estilistaServices();
@@ -18,7 +19,7 @@ router.get('/', async (req, res)=>{
     const { limit, offset } = req.query;
     const resultado =await services.find(limit, offset);
     if(resultado){
-        res.status(200).render('../views/bienvenid.hbs',{title:resultado});
+        res.status(200).render('../views/estilista',{title:resultado});
     }else{
         res.status(404).send("No se encontro la informacion");
     }
@@ -37,13 +38,10 @@ router.get('/:id', async (req, res)=>{
 
 //POST
 router.post('/', async (req, res)=>{
-    const body = req.body;
-        const resultado = await services.insertOne(body);
+    const cita = req.body.cita;
+        const resultado = await estilista1.insertMany([cita]);
         if(resultado){
-            res.status(201).json({
-                message: 'Se creo el estilista',
-                resultado
-            });
+            res.status(200).render('../views/formularioEstilista', resultado)
         }else{
             res.status(404).send("No se creó el estilista");
         }

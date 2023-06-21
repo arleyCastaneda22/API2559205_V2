@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { MongoClient, ObjectId } = require('mongodb');
 const citasServices = require('../services/citasServices');
+
 const async = require('hbs/lib/async');
 
 
@@ -15,20 +16,15 @@ const router = express.Router();
 
 
 
-// router.get('/', async (req, res)=>{
+router.get('/', async (req, res)=>{
     
-//     const resultado =await services.find();
-//     if(resultado){
-//         res.status(200).send(resultado);
-//     }else{
-//         res.status(404).send("No se encontro la informacion");
-//     }
-// })
-
-router.get('/', async(req,res)=>{
-    res.render('../views/index.hbs')
+    const resultado =await services.find();
+    if(resultado){
+        res.status(200).render('../views/citas.hbs', {citas:resultado});
+    }else{
+        res.status(404).send("No se encontro la informacion");
+    }
 })
-
 
 router.get('/:id', async (req, res)=>{
     const id = req.params.id;
@@ -54,15 +50,15 @@ router.post('/', async (req, res)=>{
         }
 })
 
-router.post('/', async (req, res)=>{
-    const body = req.body;
-        const resultado = await services.insertMany([body]);
-        if(resultado){
-            res.status(201).send('Se insertaron varios documentos');
-        }else{
-            res.status(404).send("No se creó la cita");
-        }
-})
+// router.post('/', async (req, res)=>{
+//     const body = req.body;
+//         const resultado = await services.insertMany([body]);
+//         if(resultado){
+//             res.status(201).send('Se insertaron varios documentos');
+//         }else{
+//             res.status(404).send("No se creó la cita");
+//         }
+// })
 
 
 

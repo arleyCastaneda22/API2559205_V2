@@ -39,11 +39,11 @@ async findOne(id){
 }
 
 //InsertOne
-async insertOne(body){
+async insertOne(cita){
     const cliente =new MongoClient(uri);
     try {
         await cliente.connect()
-        const resultado= await cliente.db('Beautysoft').collection('estilistaJhon').insertOne(body);
+        const resultado= await cliente.db('Beautysoft').collection('estilistaJhon').insertOne(cita);
         return resultado;
     } catch (error) {
         console.log(error);

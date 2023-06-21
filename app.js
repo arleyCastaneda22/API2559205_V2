@@ -20,6 +20,7 @@ app.use(morgan('tiny'))
 hbs.registerPartials(__dirname + '/views', function (err) {});
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
+app.use(express.static('public'))
 
 
 const router= express.Router();
@@ -32,12 +33,8 @@ app.get('/beautysoft/v1',(req, res)=>{
 })
 
 
-
-
-
 app.listen(PORT, ()=>{
     console.log(`El servidor esta escuchando en http://localhost:${PORT}`);
 })
-app.use(express.static('public'))
 
 module.exports=router;

@@ -17,7 +17,7 @@ router.get('/', async (req, res)=>{
     const { limit, offset } = req.query;
     const resultado =await services.find(limit, offset);
     if(resultado){
-        res.status(200).send(resultado);
+        res.status(200).render('../views/servicios.hbs', {servicios:resultado});
     }else{
         res.status(404).send("No se encontro la informacion");
     }

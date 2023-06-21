@@ -13,35 +13,31 @@
 
 <body>
 
-<h1 style="text-align: center;">Citas</h1>
+<h1 style="text-align: center;">Servicios</h1>
 <div class="boton">
   <a  href="/beautysoft/v1/estilistaJhon">Estilistas</a>
-  <a  href="/beautysoft/v1/serviciosJhon">Servicios</a>
+  <a  href="/beautysoft/v1/citasJhon">Citas</a>
 </div>
 <div class="container">
 <table class="table table-hove table-bordered">
   <thead>
     <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido</th>
-      <th scope="col">Correo</th>
+      <th scope="col">Id_servicio</th>
+      <th scope="col">Nombre de servicio</th>
+      <th scope="col">Valor</th>
     </tr>
   </thead>
   <tbody>
-    {{#each citas}}
+    {{#each servicios}}
     <tr>
-      <th scope="row">{{Id_cita}}</th>
-      <td>{{nombre}}</td>
-      <td>{{apellido}}</td>
-      <td>{{email}}</td>
-
-
-
+      <th scope="row">{{Id_servicio}}</th>
+      <td>{{nombre_servicio}}</td>
+      <td>{{valor}}</td>
     </tr>
       {{/each}}
   </tbody>
 </table>
+
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -61,8 +57,7 @@
     background: rgba(116, 51, 127, 1);
     color: white;
   }
-
-  .boton a{
+.boton a{
     background-color: rgb(255, 187, 0);
     color: white;
     padding: 8px 20px ;
