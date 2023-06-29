@@ -6,12 +6,12 @@ const routerEstilistas=require('./routesEstilistas');
 
 
 function routerApi(app){
-    const router=express.Router();
+    // const router=express.Router();
     
-    app.use('/beautysoft/v1', router);
-    router.use('/citasJhon', routerCitas),
-    router.use('/serviciosJhon',routerServicios);
-    router.use('/estilistaJhon',routerEstilistas);
+    // app.use('/beautysoft/v1', router);
+    app.use('/citasJhon', routerCitas),
+    app.use('/serviciosJhon',routerServicios);
+    app.use('/estilistaJhon',routerEstilistas);
        
 }
 

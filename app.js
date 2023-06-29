@@ -28,7 +28,7 @@ const router= express.Router();
 const PORT = process.env.PORT || 4000;
 routerApi(app);
 
-app.get('/beautysoft/v1',(req, res)=>{
+app.get('/',(req, res)=>{
     res.status(200).send('API de BeautiSoft');
 })
 

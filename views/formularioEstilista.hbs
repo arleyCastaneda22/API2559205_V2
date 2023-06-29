@@ -7,10 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/views/formularioEstilista.hbs" method="post">
-
+    <form action="../routes/routesEstilistas.js" method="POST">
     <label for="">Id_estilista</label>
-    <input type="text" name="cita">
+    <input type="number" name="id"><br>
+
+    <label for="">nombre</label>
+    <input type="text" name="nombre"><br>
+
+    <label for="">apellido</label>
+    <input type="text" name="apellido"><br>
+
+    <label for="">Email</label>
+    <input type="email" name="email"><br>
+
+    <input type="submit" value="Enviar" >
     </form>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

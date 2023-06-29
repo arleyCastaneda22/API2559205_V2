@@ -19,7 +19,7 @@ router.get('/', async (req, res)=>{
     const { limit, offset } = req.query;
     const resultado =await services.find(limit, offset);
     if(resultado){
-        res.status(200).render('../views/estilista',{title:resultado});
+        res.status(200).render('../views/estilista.hbs', {title:resultado});
     }else{
         res.status(404).send("No se encontro la informacion");
     }
@@ -37,30 +37,39 @@ router.get('/:id', async (req, res)=>{
 })
 
 //POST
-router.post('/', async (req, res)=>{
-    const cita = req.body.cita;
-        const resultado = await estilista1.insertMany([cita]);
+
+// router.get('/create', async(req, res)=>{
+//     res.render('../views/formularioEstilista.hbs')
+// })
+
+router.post('/create', async (req, res)=>{
+    const Id_estilista =  req.body.Id_estilista;
+    const nombre = req.body.nombre;
+    const apellido= req.body.apellido;
+    const email = req.body.email;
+        const resultado = await services.insertOne(Id_estilista, nombre,apellido,email);
+
         if(resultado){
-            res.status(200).render('../views/formularioEstilista', resultado)
+            res.redirect('../views/estilista.hbs')
         }else{
             res.status(404).send("No se creó el estilista");
         }
 })
 
-router.post('/', async (req, res)=>{
-    const body = req.body;
-        const resultado = await services.insertMany(body);
-        if(resultado){
-            res.status(201).json({
-                message: 'Se creo los estilista',
-                resultado
-            });
-        }else{
-            res.status(404).send("No se creó el estilista");
-        }
-})
+// router.post('/', async (req, res)=>{
+//     const body = req.body;
+//         const resultado = await services.insertMany(body);
+//         if(resultado){
+//             res.status(201).json({
+//                 message: 'Se creo los estilista',
+//                 resultado
+//             });
+//         }else{
+//             res.status(404).send("No se creó el estilista");
+//         }
+// })
 //DELETE
-router.delete('/:id', async (req, res)=>{
+router.get('/eliminar/:id', async (req, res)=>{
     const id = req.params.id;
         const resultado = await services.deleteOne(id);
         if(resultado){
@@ -68,7 +77,12 @@ router.delete('/:id', async (req, res)=>{
         }else{
             res.status(404).send("No se encontro la información");
         }
-})
+
+    res.redirect('/views/estilista.hbs')    
+    }
+    
+    
+    )
 
 //UpdateOne
 router.patch('/:id', async (req, res)=>{
