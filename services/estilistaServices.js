@@ -60,25 +60,25 @@ async insertOne(id_estilista,nombre, apellido, email){
 
 //InsertMany
 
-// async insertMany(id_estilista,nombre, apellido, email){
-//   const cliente =new MongoClient(uri);
-//   try {
-//       await cliente.connect()
-//       const resultado= await cliente.db('Beautysoft').collection('citasJhon').insertMany(  {
-//         "Id_estilista":id_estilista,
-//         "nombre":nombre, 
-//         "apellido":apellido, 
-//         "email":email,
-//         "estado":true
-//     });
-//       return resultado;
-//   } catch (error) {
-//       console.log(error);
-//   }finally{
-//       await cliente.close()
-//   }
+async insertMany(id_estilista,nombre, apellido, email){
+  const cliente =new MongoClient(uri);
+  try {
+      await cliente.connect()
+      const resultado= await cliente.db('Beautysoft').collection('estilistaJhon').insertMany(  [{
+        "Id_estilista":id_estilista,
+        "nombre":nombre, 
+        "apellido":apellido, 
+        "email":email,
+        "estado":true
+    }]);
+      return resultado;
+  } catch (error) {
+      console.log(error);
+  }finally{
+      await cliente.close()
+  }
 
-// }
+}
 
 //DeletOne
 async deleteOne(id){
